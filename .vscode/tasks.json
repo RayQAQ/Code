@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc.exe build active file",    //修改此项
+            "command": "C:\\Program Files (x86)\\mingw64\\bin\\gdb.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-std=c11"
+            ],
+            "options": {
+                "cwd": "C:\\Program Files (x86)\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        }
+    ]
+}
