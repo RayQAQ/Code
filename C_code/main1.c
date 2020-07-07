@@ -3,7 +3,6 @@
 #include <string.h>
 int main()
 /* { 
-
     char *t;
     t=(char *)malloc(sizeof(char)*10);
     printf("no1 strlen(t)=%d   sizeof(t)=%d   \n\n\n",strlen(t),sizeof(t));
