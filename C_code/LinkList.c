@@ -1,33 +1,69 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
-//定义结构体Node以及结构体指针SList
-typedef struct node
+struct Node
 {
-        int value;
-        struct node *next;
-}Node,*SList;
+    void *data;
+    struct Node *prev;
+    struct Node *next;
+};
 
-//头插法建立具有头结点的单链表
-SList HeadInsert(SList L)
+
+struct Node* InitList()
 {
-    int x,i=1;
-    SList temp;
-    scanf("%d",&x);
-    L = (SList)malloc(sizeof(Node));
-    L->value = NULL;
-    L->next = NULL;
-    while(i<7)
-    {
-        temp = (SList)malloc(sizeof(Node));
-        scanf("%d",&x);
-        temp->value = x;
-        L->next = temp;
-        temp->next = L->next;
-    }
+	struct Node *ListHead;
+    ListHead = (struct Node *)malloc(sizeof(struct Node));
+    ListHead->prev = NULL;
+    ListHead->next = NULL;
+	return ListHead;
 }
+
+int NodeAdd(struct Node *ListHead, void *DataInsert, int sum)
+{
+    struct Node *NodeNew;
+    NodeNew = (struct Node *)malloc(sizeof(struct Node));
+    NodeNew->data = DataInsert;
+    NodeNew->prev = ListHead;
+    NodeNew->next = ListHead->next;
+    ListHead->next = NodeNew;
+    sum++;
+    return sum;
+}
+
+int NodeDelet(struct Node *NodeDel, int sum)
+{
+	if(sum==0)
+	{
+		return 0;
+	}
+	if(NodeDel->next)
+	{
+		//printf("1");
+		NodeDel->prev->next = NodeDel->next;
+	}
+	if(!(NodeDel->next))
+	{
+		NodeDel->prev->next = NodeDel->next;
+    	NodeDel->next->prev = NodeDel->prev;
+	}
+    
+    free(NodeDel);
+    sum--;
+    return sum;
+}
+
 int main()
 {
-    
+    int sum = 0;
+    int DataExample = 2;
+	int *DataPtr=&DataExample;
+    struct Node *ListHead;
+	ListHead = (struct Node *)malloc(sizeof(struct Node));
+    ListHead=InitList();
+    sum=NodeAdd(ListHead, DataPtr, sum);
+	printf("\n%d\n",*(int*)(ListHead->next->data));
+	sum=NodeDelet(ListHead->next, sum);
+    printf("\n%d\n",sum);
     return 0;
 }
