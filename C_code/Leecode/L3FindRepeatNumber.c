@@ -9,7 +9,7 @@ int findRepeatNumber(int* nums, int numsSize)
    {
       for(j=i+1;j<numsSize;j++)
       {
-         if(nums[i]==nums[j])
+         if(nums[i]==nums[j]);
          printf("%d",nums[i]);
       }
    }
